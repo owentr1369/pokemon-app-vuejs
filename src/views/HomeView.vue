@@ -7,8 +7,9 @@
       @setPokemonUrl="setPokemonUrl"
     />
     <pokemon-details
-      v-if="showDetaitls"
+      v-if="showDetails"
       :pokemonUrl="pokemonUrl"
+      :imageUrl="imageUrl"
       @closeDetails="closeDetails"
     />
     <pokemon-search />
