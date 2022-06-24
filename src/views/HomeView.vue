@@ -1,18 +1,25 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="container">
+    <h1>Pokemon's</h1>
+    <pokemon-list :imageUrl="imageUrl" :apiUrl="apiUrl" />
+    <pokemon-search />
+    <pokemon-details />
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
+import PokemonSearch from "@/components/PokemonSearch.vue";
+import PokemonList from "@/components/PokemonList.vue";
+import PokemonDetails from "@/components/PokemonDetails.vue";
 export default {
-  name: 'HomeView',
-  components: {
-    HelloWorld
-  }
-}
+  name: "HomeView",
+  components: { PokemonSearch, PokemonList, PokemonDetails },
+  data: function () {
+    return {
+      imageUrl:
+        "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/",
+      apiUrl: "https://pokeapi.co/api/v2/pokemon?limit=200",
+    };
+  },
+};
 </script>
