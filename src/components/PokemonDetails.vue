@@ -40,6 +40,7 @@
         </div>
       </div>
       <h2 v-else>The pokemon was not found</h2>
+      <button class="close" @click="closeDetails">Close</button>
     </div>
     <div v-else class="lds-dual-ring"></div>
   </div>
@@ -71,6 +72,9 @@ export default {
         .catch((error) => {
           console.log(error);
         });
+    },
+    closeDetails() {
+      this.$emit("closeDetails");
     },
   },
   created() {
@@ -171,6 +175,17 @@ export default {
           background-color: #c73015;
         }
       }
+    }
+    .close {
+      outline: none;
+      border: none;
+      border-radius: 6px;
+      background-color: #333;
+      color: #efefef;
+      padding: 10px 20px;
+      margin-bottom: 20px;
+      font-size: 1.2rem;
+      cursor: pointer;
     }
   }
 }
