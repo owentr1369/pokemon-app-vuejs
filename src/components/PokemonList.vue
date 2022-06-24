@@ -1,6 +1,10 @@
 <template>
   <div class="list">
-    <article v-for="(pokemon, index) in pokemons" :key="'poke' + index">
+    <article
+      v-for="(pokemon, index) in pokemons"
+      :key="'poke' + index"
+      @click="setPokemonUrl(pokemon.url)"
+    >
       <img
         :src="imageUrl + pokemon.id + '.png'"
         alt=""
@@ -22,11 +26,13 @@ export default {
   data: function () {
     return {
       pokemons: [],
+      nextUrl: "",
+      currentUrl: "",
     };
   },
   methods: {
     fetchData() {
-      let req = new Request(this.apiUrl);
+      let req = new Request(this.currentUrl);
       fetch(req)
         .then((resp) => {
           if (resp.status === 200) {
@@ -44,9 +50,30 @@ export default {
           console.log(error);
         });
     },
+    scrollTrigger() {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.intersectionRatio > 0 && this.nextUrl) {
+            this.next();
+          }
+        });
+      });
+      observer.observe(this.$refs.infinitescrolltrigger);
+    },
+    next() {
+      this.currentUrl = this.nextUrl;
+      this.fetchData();
+    },
+    setPokemonUrl(url) {
+      this.$$emit("setPokemonUrl", url);
+    },
   },
   created() {
+    this.currentUrl = this.apiUrl;
     this.fetchData();
+  },
+  mounted() {
+    this.scrollTrigger();
   },
 };
 </script>
