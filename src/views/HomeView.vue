@@ -27,7 +27,7 @@ export default {
     return {
       imageUrl:
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/",
-      apiUrl: "https://pokeapi.co/api/v2/pokemon?limit=200",
+      apiUrl: "https://pokeapi.co/api/v2/pokemon?limit=2000",
       pokemonUrl: "",
       showDetails: false,
     };
